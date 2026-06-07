@@ -13,12 +13,12 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.siyam18 }}
-          password: ${{ secrets.dckr_pat_OuobAq9c4FCKALdDFOXDfqO-p8E }}
+          username: "siyam18"
+          password: "dckr_pat_OuobAq9c4FCKALdDFOXDfqO-p8E"
 
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pcos-backend:latest
+          tags: "siyam18/pcos-backend:latest"
