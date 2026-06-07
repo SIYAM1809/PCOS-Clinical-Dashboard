@@ -11,19 +11,17 @@ export default function ResultCard({ result }: Props) {
   const pct = Math.round(result.probability * 100);
 
   return (
-    <div className={`rounded-2xl border-2 p-6 mt-6 ${
-      isPositive
-        ? "border-red-300 bg-red-50"
-        : "border-green-300 bg-green-50"
-    }`}>
+    <div className={`rounded-2xl border-2 p-6 mt-6 ${isPositive
+      ? "border-red-300 bg-red-50"
+      : "border-green-300 bg-green-50"
+      }`}>
       <div className="flex items-center justify-between mb-4">
         <div>
           <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
             Diagnosis
           </p>
-          <p className={`text-2xl font-bold mt-1 ${
-            isPositive ? "text-red-600" : "text-green-600"
-          }`}>
+          <p className={`text-2xl font-bold mt-1 ${isPositive ? "text-red-600" : "text-green-600"
+            }`}>
             {result.label}
           </p>
         </div>
@@ -31,9 +29,8 @@ export default function ResultCard({ result }: Props) {
           <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
             Probability
           </p>
-          <p className={`text-4xl font-bold mt-1 ${
-            isPositive ? "text-red-600" : "text-green-600"
-          }`}>
+          <p className={`text-4xl font-bold mt-1 ${isPositive ? "text-red-600" : "text-green-600"
+            }`}>
             {pct}%
           </p>
         </div>

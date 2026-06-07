@@ -29,7 +29,7 @@ export default function ShapChart({ shapValues }: Props) {
             width={160}
           />
           <Tooltip
-            formatter={(v: any) => [Number(v).toFixed(4), "SHAP value"]}
+            formatter={(v: number) => [v.toFixed(4), "SHAP value"]}
           />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
             {data.map((entry, i) => (
