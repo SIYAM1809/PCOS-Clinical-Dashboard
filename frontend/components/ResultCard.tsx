@@ -1,5 +1,5 @@
 "use client";
-import { PCOSResult } from "@/lib/api";
+import { PCOSResult } from "../lib/api";
 import ShapChart from "./ShapChart";
 
 interface Props {
