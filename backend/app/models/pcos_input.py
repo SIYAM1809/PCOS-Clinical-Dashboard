@@ -1,0 +1,23 @@
+from pydantic import BaseModel, Field
+
+class PCOSInput(BaseModel):
+    age: float = Field(..., ge=0, le=100)
+    weight: float = Field(..., ge=20, le=200)
+    bmi: float = Field(..., ge=10, le=60)
+    cycle: int = Field(..., ge=1, le=2)
+    cycle_length: float = Field(..., ge=1, le=90)
+    marriage_years: float = Field(..., ge=0, le=50)
+    hip: float = Field(..., ge=20, le=80)
+    waist: float = Field(..., ge=20, le=80)
+    amh: float = Field(..., ge=0, le=20)
+    weight_gain: int = Field(..., ge=0, le=1)
+    hair_growth: int = Field(..., ge=0, le=1)
+    skin_darkening: int = Field(..., ge=0, le=1)
+    hair_loss: int = Field(..., ge=0, le=1)
+    pimples: int = Field(..., ge=0, le=1)
+    fast_food: int = Field(..., ge=0, le=1)
+    follicle_l: float = Field(..., ge=0, le=30)
+    follicle_r: float = Field(..., ge=0, le=30)
+    avg_fsize_l: float = Field(..., ge=0, le=30)
+    avg_fsize_r: float = Field(..., ge=0, le=30)
+    endometrium: float = Field(..., ge=0, le=30)
