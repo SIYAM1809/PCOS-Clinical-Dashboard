@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { predictPCOS, PCOSInput, PCOSResult } from "@/lib/api";
-import ResultCard from "@/components/ResultCard";
+import { predictPCOS, PCOSInput, PCOSResult } from "./lib/api";
+import ResultCard from "./components/ResultCard";
 
 const defaultValues: PCOSInput = {
   age: 28, weight: 65, bmi: 24.0, cycle: 2, cycle_length: 35,
