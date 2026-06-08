@@ -5,9 +5,7 @@ import {
 } from "recharts";
 import type { ValueType } from "recharts/types/component/DefaultTooltipContent";
 
-interface Props {
-  shapValues: Record<string, number>;
-}
+interface Props { shapValues: Record<string, number>; }
 
 export default function ShapChart({ shapValues }: Props) {
   const data = Object.entries(shapValues)
@@ -15,35 +13,26 @@ export default function ShapChart({ shapValues }: Props) {
     .sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
 
   return (
-    <div className="w-full">
-      <h3 className="text-sm font-semibold text-slate-600 mb-3">
-        Top contributing factors
-      </h3>
-      <ResponsiveContainer width="100%" height={220}>
-        <BarChart data={data} layout="vertical" margin={{ left: 20, right: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-          <XAxis type="number" tick={{ fontSize: 11 }} />
-          <YAxis
-            type="category"
-            dataKey="name"
-            tick={{ fontSize: 11 }}
-            width={160}
-          />
+    <div style={{ width: "100%" }}>
+      <ResponsiveContainer width="100%" height={210}>
+        <BarChart data={data} layout="vertical" margin={{ left: 0, right: 16, top: 4, bottom: 4 }}>
+          <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="rgba(255,255,255,0.05)" />
+          <XAxis type="number" tick={{ fontSize: 10, fill: "#4a5f7a" }} axisLine={false} tickLine={false} />
+          <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: "#94a3b8" }} width={150} axisLine={false} tickLine={false} />
           <Tooltip
-            formatter={(v: ValueType | undefined) => [Number(v ?? 0).toFixed(4), "SHAP value"]}
+            formatter={(v: ValueType | undefined) => [Number(v ?? 0).toFixed(4), "SHAP"]}
+            contentStyle={{ background: "#1a2235", border: "1px solid #2a3a55", borderRadius: 8, fontSize: 12, color: "#f1f5f9" }}
+            cursor={{ fill: "rgba(255,255,255,0.04)" }}
           />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-            {data.map((entry, i) => (
-              <Cell
-                key={i}
-                fill={entry.value > 0 ? "#ef4444" : "#22c55e"}
-              />
+            {data.map((e, i) => (
+              <Cell key={i} fill={e.value > 0 ? "#ef4444" : "#10b981"} fillOpacity={0.85} />
             ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <p className="text-xs text-slate-400 mt-2">
-        Red = increases PCOS risk · Green = decreases PCOS risk
+      <p style={{ fontSize: 11, color: "#4a5f7a", marginTop: 6 }}>
+        🔴 Increases PCOS risk &nbsp;·&nbsp; 🟢 Decreases PCOS risk
       </p>
     </div>
   );
