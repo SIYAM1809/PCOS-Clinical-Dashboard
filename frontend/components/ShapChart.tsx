@@ -3,6 +3,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Cell
 } from "recharts";
+import type { ValueType } from "recharts/types/component/DefaultTooltipContent";
 
 interface Props {
   shapValues: Record<string, number>;
@@ -29,7 +30,7 @@ export default function ShapChart({ shapValues }: Props) {
             width={160}
           />
           <Tooltip
-            formatter={(v: number) => [v.toFixed(4), "SHAP value"]}
+            formatter={(v: ValueType | undefined) => [Number(v ?? 0).toFixed(4), "SHAP value"]}
           />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
             {data.map((entry, i) => (
