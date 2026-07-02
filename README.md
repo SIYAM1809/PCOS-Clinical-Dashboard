@@ -22,8 +22,16 @@
 
 <br/>
 
-![PCOS Clinical Dashboard Demo](https://raw.githubusercontent.com/SIYAM1809/PCOS-Clinical-Dashboard/main/assets/demo.png)
+## Screenshots
 
+### PCOS Detected — High Confidence (88%)
+![PCOS Detected](https://raw.githubusercontent.com/SIYAM1809/PCOS-Clinical-Dashboard/main/assets/demo_positive.png)
+
+### No PCOS Detected — Moderate Confidence (46%)
+![No PCOS Moderate](https://raw.githubusercontent.com/SIYAM1809/PCOS-Clinical-Dashboard/main/assets/demo_negative_moderate.png)
+
+### No PCOS Detected — High Confidence (4%)
+![No PCOS High](https://raw.githubusercontent.com/SIYAM1809/PCOS-Clinical-Dashboard/main/assets/demo_negative_high.png)
 *Clinical input form → ensemble prediction → SHAP explainability — all in one interface*
 
 </div>
