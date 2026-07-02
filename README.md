@@ -24,7 +24,7 @@
 
 ## Screenshots
 
-### PCOS Detected — High Confidence (88%)
+### PCOS Detected — High Confidence (94%)
 ![PCOS Detected](https://raw.githubusercontent.com/SIYAM1809/PCOS-Clinical-Dashboard/main/assets/demo_positive.png)
 
 ### No PCOS Detected — Moderate Confidence (46%)
