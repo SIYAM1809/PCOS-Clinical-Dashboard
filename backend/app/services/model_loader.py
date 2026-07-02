@@ -21,7 +21,8 @@ def load_models():
         "scaler.pkl",
         "selector.pkl",
         "selected_features.json",
-        "metadata.json"
+        "metadata.json",
+        "inference_config.json"
     ]
 
     for filename in files:
