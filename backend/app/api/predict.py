@@ -76,6 +76,66 @@ async def predict(data: PCOSInput):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.post("/debug")
+async def debug(data: PCOSInput):
+    try:
+        artifacts = load_models()
+
+        config            = artifacts["inference_config"]
+        all_features      = config["all_features"]
+        feature_medians   = config["feature_medians"]
+        selected_features = config["selected_features"]
+
+        row = {f: feature_medians[f] for f in all_features}
+        row["Age (yrs)"]             = data.age
+        row["Weight (Kg)"]           = data.weight
+        row["BMI"]                   = data.bmi
+        row["Cycle(R/I)"]            = data.cycle
+        row["Cycle length(days)"]    = data.cycle_length
+        row["Marraige Status (Yrs)"] = data.marriage_years
+        row["Hip(inch)"]             = data.hip
+        row["Waist(inch)"]           = data.waist
+        row["AMH(ng/mL)"]            = data.amh
+        row["Weight gain(Y/N)"]      = data.weight_gain
+        row["hair growth(Y/N)"]      = data.hair_growth
+        row["Skin darkening (Y/N)"]  = data.skin_darkening
+        row["Hair loss(Y/N)"]        = data.hair_loss
+        row["Pimples(Y/N)"]          = data.pimples
+        row["Fast food (Y/N)"]       = data.fast_food
+        row["Follicle No. (L)"]      = data.follicle_l
+        row["Follicle No. (R)"]      = data.follicle_r
+        row["Avg. F size (L) (mm)"]  = data.avg_fsize_l
+        row["Avg. F size (R) (mm)"]  = data.avg_fsize_r
+        row["Endometrium (mm)"]      = data.endometrium
+
+        X_raw      = pd.DataFrame([row], columns=all_features)
+        X_scaled   = artifacts["scaler"].transform(X_raw)
+        X_selected = artifacts["selector"].transform(X_scaled)
+
+        xgb_prob  = artifacts["xgb_calibrated"].predict_proba(X_selected)[0][1]
+        lgbm_prob = artifacts["lgbm_calibrated"].predict_proba(X_selected)[0][1]
+        cat_prob  = artifacts["cat_calibrated"].predict_proba(X_selected)[0][1]
+
+        # Raw uncalibrated XGBoost probability
+        xgb_raw = artifacts["xgb_calibrated"].calibrated_classifiers_[0].estimator.predict_proba(X_selected)[0][1]
+
+        return {
+            "xgb_calibrated_prob":   round(float(xgb_prob), 4),
+            "lgbm_calibrated_prob":  round(float(lgbm_prob), 4),
+            "cat_calibrated_prob":   round(float(cat_prob), 4),
+            "xgb_raw_uncalibrated":  round(float(xgb_raw), 4),
+            "ensemble_prob":         round(float((xgb_prob + lgbm_prob + cat_prob) / 3), 4),
+            "X_scaled_sample":       X_scaled[0][:5].tolist(),
+            "X_selected_sample":     X_selected[0][:5].tolist(),
+            "inference_config_loaded": True,
+            "n_all_features":        len(all_features),
+            "n_selected_features":   len(selected_features)
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/metadata")
 async def get_metadata():
     artifacts = load_models()
