@@ -1,0 +1,45 @@
+## Vercel Web Analytics Installation
+
+Successfully installed and configured Vercel Web Analytics for the PCOS Clinical Dashboard project.
+
+### Changes Made
+
+**1. Package Installation**
+- Installed `@vercel/analytics` package (latest version)
+- Updated `package.json` with the new dependency
+- Updated `package-lock.json` with the complete dependency tree
+
+**2. Analytics Integration**
+- Modified `frontend/app/layout.tsx`:
+  - Added import statement: `import { Analytics } from "@vercel/analytics/next"`
+  - Added `<Analytics />` component inside the `<body>` tag of the root layout
+  - Preserved existing code structure and formatting
+
+### Implementation Details
+
+Following the official Vercel documentation (https://vercel.com/docs/analytics/quickstart), I implemented the App Router configuration for Next.js:
+- The Analytics component is placed at the end of the body tag in the root layout
+- This ensures analytics tracking is active across all pages in the application
+- The implementation follows Next.js 16.2.7 best practices for the App Router
+
+### Verification Completed
+
+✅ **Build Verification**: Next.js build completed successfully with no errors
+✅ **Linter Check**: No linting errors introduced by the Analytics integration
+✅ **Type Safety**: All TypeScript types are correctly imported and used
+✅ **Lock Files**: package-lock.json updated correctly with new dependencies
+
+### Next Steps
+
+To complete the setup:
+1. Deploy the application to Vercel
+2. Enable Web Analytics in the Vercel dashboard for this project
+3. After deployment, verify analytics are working by checking the browser's Network tab for requests to the analytics endpoint
+4. View analytics data in the Vercel dashboard under the "Analytics" section
+
+### Notes
+
+- The integration uses the `@vercel/analytics/next` subpackage which is optimized for Next.js applications
+- No environment variables are required for basic analytics functionality
+- Analytics data will be collected automatically once the project is deployed to Vercel and analytics are enabled in the dashboard
+- A pre-existing linting error was found in `app/page.tsx` (unrelated to this change) regarding setState in useEffect
